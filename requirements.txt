@@ -1,0 +1,5 @@
+langchain_community
+langchain
+langchain_experimental
+deep_translator
+huggingface_hub
