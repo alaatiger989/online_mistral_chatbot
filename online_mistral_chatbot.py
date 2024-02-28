@@ -18,7 +18,8 @@ HUGGINGFACEHUB_API_TOKEN = "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"
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
 from deep_translator import GoogleTranslator
 import streamlit as st
-
+system_prompt = "You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.\n\nIf a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information."
+st.markdown(system_prompt)
 
 @st.cache_resource
 def create_chain():
@@ -31,7 +32,7 @@ def create_chain():
     )
     model = Llama2Chat(llm=llm)
     template_messages = [
-        SystemMessage(content="You are a helpful AI assistant who answers questions in Detailed Answers."),
+        SystemMessage(content=system_prompt),
         MessagesPlaceholder(variable_name="chat_history"),
         HumanMessagePromptTemplate.from_template("{text}"),
     ]
